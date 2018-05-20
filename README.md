@@ -1,1 +1,1 @@
-Script to download the from index websites
+Script to download the video files from index of x websites
