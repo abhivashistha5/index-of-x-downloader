@@ -32,10 +32,11 @@ def extract_links(html, base_link=None):
     for link in all_links:
         href = link.get('href')
         name = link.string
-        if type(href) == type('') and href.lower().endswith(('.mp4', '.mkv', '.avi', '.3gp')): #check if the link points to a video file
+        if type(href) == type('') and href.lower().endswith(('.mp4', '.mkv', '.avi', '.3gp', '.flv', '.wmv', '.mov')): #check if the link points to a video file
             if href.startswith(('http://', 'https://')) == False and base_link != None: 
                 href = base_link + href # if relative links are used then make absolute link
             video_links.append({'name': name, 'link': href})
+    video_links.sort(key=lambda k: k['name'])
     return video_links
 
 
@@ -56,7 +57,8 @@ def main():
         print('Downloading ->', link['name'])
         try:
             download_file = os.path.join(download_folder, link['name'])
-            subprocess.call(['curl', '-o', download_file, '-O', link['link']])
+            print(download_file)
+            # subprocess.call(['curl', '-o', download_file, '-O', link['link']])
         except KeyboardInterrupt:
             print('Keyboard intterupt')
             exit(0)
