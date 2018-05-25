@@ -57,8 +57,7 @@ def main():
         print('Downloading ->', link['name'])
         try:
             download_file = os.path.join(download_folder, link['name'])
-            print(download_file)
-            # subprocess.call(['curl', '-o', download_file, '-O', link['link']])
+            subprocess.call(['curl', '-o', download_file, '-O', link['link']])
         except KeyboardInterrupt:
             print('Keyboard intterupt')
             exit(0)
